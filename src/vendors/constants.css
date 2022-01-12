@@ -1,0 +1,22 @@
+:root {
+  /* colors */
+  --clr-primary-dark: #1a1b22;
+  --clr-gray: #e6e8eb;
+  --clr-gray-secondary: #b6bcbf;
+  --clr-gray-bg: #f5f6f7;
+  --clr-blue: #2f71e5;
+  --clr-blue-hover: #347eff;
+  --clr-blue-active: #2a65cc;
+  --clr-white: #fff;
+  --clr-red: #ff0000;
+
+  /* font-sizes */
+  --fs-400: 1.125rem;
+  --fs-300: 1rem;
+
+  /* font-families */
+  --ff-roboto: 'Roboto', sans-serif;
+  --ff-roboto-slab: 'Roboto Slab', sans-serif;
+  --ff-inter: 'Inter', sans-serif;
+  --ff-source: 'Source Sans Pro', sans-serif;
+}

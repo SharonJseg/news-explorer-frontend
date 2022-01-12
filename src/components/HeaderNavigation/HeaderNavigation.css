@@ -1,0 +1,129 @@
+.header-nav__container {
+  width: 100%;
+  box-shadow: inset 0px -1px 0px #d1d2d6;
+}
+
+.header-nav {
+  width: calc(100% - 104px * 2);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 0;
+}
+
+.header-nav__title {
+  text-decoration: none;
+  font-family: var(--ff-roboto-slab);
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--clr-white);
+  cursor: pointer;
+}
+
+.header-nav__title_black {
+  color: var(--clr-primary-dark);
+}
+
+.header-nav__items {
+  font-family: var(--ff-roboto);
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+
+.header-nav__link {
+  display: block;
+  text-decoration: none;
+  color: var(--clr-white);
+  font-weight: 500;
+  padding: 0 32px;
+  line-height: 4.3;
+  border-bottom: 3px solid transparent;
+}
+
+.header-nav__link_black {
+  color: var(--clr-primary-dark);
+}
+
+.header-nav__link_active {
+  border-bottom: 3px solid var(--clr-white);
+}
+
+.header-nav__link_active_black {
+  border-bottom: 3px solid var(--clr-primary-dark);
+}
+
+.header-nav__button {
+  background: none;
+  outline: none;
+  color: var(--clr-white);
+  border: 1px solid var(--clr-white);
+  width: 176px;
+  padding: 12px 0;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.header-nav__button_black {
+  color: var(--clr-primary-dark);
+  border: 1px solid var(--clr-primary-dark);
+}
+
+.header-nav__signout-button {
+  background: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--clr-white);
+  font-weight: 500;
+  border: 1px solid var(--clr-white);
+  min-width: 112px;
+  padding: 12px 19px;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.header-nav__signout-button_black {
+  color: var(--clr-primary-dark);
+  border: 1px solid var(--clr-gray-secondary);
+}
+
+.header-nav__signout-icon {
+  display: inline;
+  padding-left: 17px;
+}
+
+@media screen and (max-width: 768px) {
+  .header-nav {
+    width: calc(100% - 40px * 2);
+  }
+
+  .header-nav__title {
+    font-size: 20px;
+  }
+
+  .header-nav__items {
+    gap: 16px;
+  }
+
+  .header-nav__link {
+    font-size: 16px;
+    padding: 0 24px;
+    line-height: 4;
+  }
+
+  .header-nav__button {
+    font-size: 16px;
+    width: 152px;
+    padding: 8px 0;
+    border-radius: 100px;
+  }
+
+  .header-nav__signout-button {
+    font-size: 16px;
+    padding: 8px 19px;
+  }
+}

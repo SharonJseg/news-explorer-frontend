@@ -1,0 +1,236 @@
+.card {
+  width: 400px;
+  height: 576px;
+  overflow: hidden;
+  background-color: var(--clr-white);
+  border-radius: 16px;
+  position: relative;
+}
+
+.card__button {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  z-index: 10;
+  top: 24px;
+  right: 24px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: var(--clr-white);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.card__button_type_bookmark {
+  background-image: url(../../images/bookmark.svg);
+  transition: all 0.2s ease-out;
+}
+.card__button_type_bookmark:hover {
+  background-image: url(../../images/bookmark-hover.svg);
+  transition: all 0.2s ease-in;
+}
+
+.card__button_type_saved {
+  background-image: url(../../images/bookmark-saved.svg);
+  transition: all 0.2s ease-out;
+}
+
+.card__button_type_delete {
+  background-image: url(../../images/bookmark-delete.svg);
+  transition: all 0.2s ease-out;
+}
+
+.card__button_type_delete:hover {
+  background-image: url(../../images/bookmark-delete.svg);
+  transition: all 0.2s ease-out;
+}
+
+.card__keyword {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  font-family: var(--ff-roboto);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 40px;
+  display: block;
+  background-color: var(--clr-white);
+  padding: 0 20px;
+  border-radius: 10px;
+  user-select: none;
+}
+
+.card__tooltip {
+  font-family: var(--ff-roboto);
+  font-weight: 500;
+  display: block;
+  position: absolute;
+  top: 24px;
+  right: 69px;
+  background-color: var(--clr-white);
+  padding: 0 20px;
+  font-size: 12px;
+  line-height: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 10px 22px rgba(59, 74, 116, 0.1);
+  user-select: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.card__button:hover + .card__tooltip {
+  transition: opacity 0.3s ease-in;
+  opacity: 1;
+  visibility: visible;
+}
+
+.card__image {
+  width: 100%;
+  height: 272px;
+  object-fit: cover;
+}
+
+.card__date {
+  font-family: var(--ff-source);
+  font-weight: 400;
+  line-height: 1.33;
+  color: var(--clr-gray-secondary);
+  margin: 0 24px;
+  margin-top: 20px;
+}
+
+.card__title {
+  font-family: var(--ff-roboto-slab);
+  font-size: 26px;
+  height: 60px;
+  line-height: 1.15;
+  margin: 0 24px;
+  margin-top: 12px;
+  margin-bottom: 16px;
+  max-width: 352px;
+}
+
+.card__text {
+  font-family: var(--ff-roboto);
+  font-size: 16px;
+  line-height: 1.375;
+  margin: 0 24px;
+  height: 110px;
+  width: 352px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.card__source {
+  display: inline-block;
+  font-family: var(--ff-roboto-slab);
+  font-weight: 700;
+  font-style: normal;
+  text-transform: uppercase;
+  color: var(--clr-gray-secondary);
+  margin: 0 24px;
+  margin-top: 18px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    width: 224px;
+    height: 420px;
+  }
+
+  .card__button {
+    top: 8px;
+    right: 8px;
+  }
+
+  .card__image {
+    height: 150px;
+  }
+
+  .card__keyword {
+    top: 8px;
+    left: 8px;
+  }
+
+  .card__tooltip {
+    top: 8px;
+    right: 56px;
+    z-index: 100;
+  }
+
+  .card__date {
+    margin: 0 15px;
+    margin-top: 18px;
+  }
+
+  .card__title {
+    font-size: 22px;
+    line-height: 1.15;
+    height: 72px;
+    margin: 10px 15px;
+    max-width: 352px;
+  }
+
+  .card__text {
+    margin: 0 15px;
+    height: 88px;
+    width: 192px;
+  }
+
+  .card__source {
+    margin: 15px 15px 0;
+    max-width: 192px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .card {
+    width: 100%;
+    height: 440px;
+  }
+
+  .card__image {
+    height: 196px;
+  }
+
+  .card__title {
+    height: 48px;
+    margin: 10px 15px 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+  }
+
+  .card__text {
+    width: 256px;
+  }
+
+  .card__source {
+    margin: 10px 15px 0;
+  }
+
+  .card__button {
+    top: 16px;
+    right: 16px;
+  }
+
+  .card__keyword {
+    top: 16px;
+    left: 16px;
+  }
+
+  .card__tooltip {
+    top: 16px;
+    right: 58px;
+    z-index: 100;
+  }
+}
