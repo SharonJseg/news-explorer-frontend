@@ -12,7 +12,8 @@ function App() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  // I added a logged in state for you to see the styles change from the browser react components tab. will add the functionality in the next part
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleOpenModal = () => {
     setModalIsOpen(true);
@@ -55,10 +56,10 @@ function App() {
       />
       <Switch>
         <Route exact path='/'>
-          <Main />
+          <Main isLoggedIn={isLoggedIn} />
         </Route>
         <Route path='/saved-news'>
-          <Main />
+          <Main isLoggedIn={isLoggedIn} />
         </Route>
       </Switch>
       <Footer />

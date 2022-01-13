@@ -27,3 +27,15 @@
     transform: rotate(360deg);
   }
 }
+
+@media screen and (max-width: 768px) {
+  .circle-preloader {
+    padding-top: 80px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .circle-preloader {
+    padding-top: 56px;
+  }
+}

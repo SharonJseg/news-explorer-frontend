@@ -8,13 +8,14 @@ import NotFound from '../NotFound/NotFound';
 import './Main.css';
 
 const Main = (props) => {
+  const { isLoggedIn } = props;
   const location = useLocation();
 
   return (
     <main className='main'>
       {/* <NotFound /> */}
       {/* <Preloader /> */}
-      <CardsList />
+      <CardsList isLoggedIn={isLoggedIn} />
       {location.pathname === '/' && <About />}
     </main>
   );

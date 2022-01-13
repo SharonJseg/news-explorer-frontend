@@ -42,7 +42,7 @@
 }
 
 .card__button_type_delete:hover {
-  background-image: url(../../images/bookmark-delete.svg);
+  background-image: url(../../images/bookmark-delete-hover.svg);
   transition: all 0.2s ease-out;
 }
 

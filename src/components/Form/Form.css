@@ -119,3 +119,19 @@
   cursor: pointer;
   color: var(--clr-blue);
 }
+
+@media screen and (max-width: 510px) {
+  .form__close-btn {
+    top: -45px;
+    right: -12px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .form__close-btn {
+    width: 24px;
+    height: 24px;
+    top: -41px;
+    right: 15px;
+  }
+}

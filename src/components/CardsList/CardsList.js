@@ -56,6 +56,7 @@ const MOCK_CARDS = [
 ];
 
 const CardsList = (props) => {
+  const { isLoggedIn } = props;
   const location = useLocation();
   return (
     <section className='news-cards-list'>
@@ -73,6 +74,7 @@ const CardsList = (props) => {
               title={cardElement.title}
               text={cardElement.text}
               source={cardElement.source}
+              isLoggedIn={isLoggedIn}
             />
           ))}
         </ul>

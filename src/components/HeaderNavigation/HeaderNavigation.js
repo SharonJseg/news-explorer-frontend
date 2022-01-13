@@ -4,6 +4,7 @@ import logoutIcon from '../../images/logout_white.svg';
 import logoutIconBlack from '../../images/logout_black.svg';
 
 const HeaderNavigation = (props) => {
+  const { isLoggedIn } = props;
   const location = useLocation();
 
   return (
@@ -35,51 +36,57 @@ const HeaderNavigation = (props) => {
               Home
             </NavLink>
           </li>
-          <li className='header-nav__item'>
-            <NavLink
-              to='/saved-news'
-              activeClassName={
-                location.pathname === '/'
-                  ? 'header-nav__link_active'
-                  : 'header-nav__link_active_black'
-              }
-              className={
-                location.pathname === '/'
-                  ? 'header-nav__link'
-                  : 'header-nav__link header-nav__link_black'
-              }
-            >
-              Saved Articles
-            </NavLink>
-          </li>
-          <li className='header-nav__item'>
-            <button
-              onClick={props.signIn}
-              className={
-                location.pathname === '/'
-                  ? 'header-nav__button'
-                  : 'header-nav__button header-nav__button_black'
-              }
-            >
-              Sign in
-            </button>
-          </li>
-          {/* <li className='header-nav__item'>
-            <button
-              className={
-                location.pathname === '/'
-                  ? 'header-nav__signout-button'
-                  : 'header-nav__signout-button header-nav__signout-button_black'
-              }
-            >
-              Sharon
-              <img
-                className='header-nav__signout-icon'
-                src={location.pathname === '/' ? logoutIcon : logoutIconBlack}
-                alt='logout icon'
-              />
-            </button>
-          </li> */}
+          {isLoggedIn && (
+            <li className='header-nav__item'>
+              <NavLink
+                to='/saved-news'
+                activeClassName={
+                  location.pathname === '/'
+                    ? 'header-nav__link_active'
+                    : 'header-nav__link_active_black'
+                }
+                className={
+                  location.pathname === '/'
+                    ? 'header-nav__link'
+                    : 'header-nav__link header-nav__link_black'
+                }
+              >
+                Saved Articles
+              </NavLink>
+            </li>
+          )}
+          {!isLoggedIn && (
+            <li className='header-nav__item'>
+              <button
+                onClick={props.signIn}
+                className={
+                  location.pathname === '/'
+                    ? 'header-nav__button'
+                    : 'header-nav__button header-nav__button_black'
+                }
+              >
+                Sign in
+              </button>
+            </li>
+          )}
+          {isLoggedIn && (
+            <li className='header-nav__item'>
+              <button
+                className={
+                  location.pathname === '/'
+                    ? 'header-nav__signout-button'
+                    : 'header-nav__signout-button header-nav__signout-button_black'
+                }
+              >
+                Sharon
+                <img
+                  className='header-nav__signout-icon'
+                  src={location.pathname === '/' ? logoutIcon : logoutIconBlack}
+                  alt='logout icon'
+                />
+              </button>
+            </li>
+          )}
         </ul>
       </nav>
     </div>

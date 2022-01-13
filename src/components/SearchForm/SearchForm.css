@@ -59,6 +59,14 @@
   right: 0;
 }
 
+.search-form__button:hover {
+  background-color: var(--clr-blue-hover);
+}
+
+.search-form__button:active {
+  background-color: var(--clr-blue-active);
+}
+
 @media screen and (max-width: 768px) {
   .search-form {
     margin: 38px auto 0;

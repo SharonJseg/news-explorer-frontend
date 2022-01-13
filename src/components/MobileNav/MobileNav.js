@@ -7,7 +7,7 @@ import mobileCloseMenu from '../../images/mobile_menu_close_icon.svg';
 import mobileCloseMenuDark from '../../images/mobile_menu_close_icon_dark.svg';
 
 const MobileNav = (props) => {
-  const { isModalOpen, isMobileMenuOpen, toggleMenu } = props;
+  const { isModalOpen, isMobileMenuOpen, toggleMenu, isLoggedIn } = props;
   const location = useLocation();
 
   return (
@@ -24,31 +24,33 @@ const MobileNav = (props) => {
           >
             NewsExplorer
           </Link>
-          <button
-            className='mobile-nav__button'
-            aria-label='menu button'
-            onClick={toggleMenu}
-          >
-            {isMobileMenuOpen === false ? (
-              <img
-                className='mobile-nav__icon'
-                src={
-                  location.pathname === '/' ? mobileMenuIcon : mobileMenuDark
-                }
-                alt='logout icon'
-              />
-            ) : (
-              <img
-                className='mobile-nav__icon'
-                src={
-                  location.pathname === '/'
-                    ? mobileCloseMenu
-                    : mobileCloseMenuDark
-                }
-                alt='logout icon'
-              />
-            )}
-          </button>
+          {!isModalOpen && (
+            <button
+              className='mobile-nav__button'
+              aria-label='menu button'
+              onClick={toggleMenu}
+            >
+              {isMobileMenuOpen === false ? (
+                <img
+                  className='mobile-nav__icon'
+                  src={
+                    location.pathname === '/' ? mobileMenuIcon : mobileMenuDark
+                  }
+                  alt='logout icon'
+                />
+              ) : (
+                <img
+                  className='mobile-nav__icon'
+                  src={
+                    location.pathname === '/'
+                      ? mobileCloseMenu
+                      : mobileCloseMenuDark
+                  }
+                  alt='logout icon'
+                />
+              )}
+            </button>
+          )}
         </nav>
       ) : (
         <nav className='mobile-nav mobile-nav_open'>
@@ -93,20 +95,24 @@ const MobileNav = (props) => {
                   Home
                 </NavLink>
               </li>
-              <li className='mobile-nav__item'>
-                <NavLink
-                  onClick={toggleMenu}
-                  to='/saved-news'
-                  className='mobile-nav__link'
-                >
-                  Saved Articles
-                </NavLink>
-              </li>
-              <li className='mobile-nav__item'>
-                <button onClick={props.signIn} className='mobile-nav__signin'>
-                  Sign in
-                </button>
-              </li>
+              {isLoggedIn && (
+                <li className='mobile-nav__item'>
+                  <NavLink
+                    onClick={toggleMenu}
+                    to='/saved-news'
+                    className='mobile-nav__link'
+                  >
+                    Saved Articles
+                  </NavLink>
+                </li>
+              )}
+              {!isLoggedIn && (
+                <li className='mobile-nav__item'>
+                  <button onClick={props.signIn} className='mobile-nav__signin'>
+                    Sign in
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
         </nav>
