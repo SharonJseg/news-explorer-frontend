@@ -5,7 +5,7 @@ const BackDrop = (props) => {
   const { isOpen, onClose } = props;
   return (
     <div
-      className={`backdrop ${isOpen ? 'backdrop__open' : ''}`}
+      className={`backdrop ${isOpen ? 'backdrop_opened' : ''}`}
       onClick={onClose}
     />
   );
@@ -14,7 +14,7 @@ const BackDrop = (props) => {
 const ModalOverlay = (props) => {
   const { isOpen, children } = props;
   return (
-    <div className={`modal ${isOpen ? 'modal__open' : ''}`}>
+    <div className={`modal ${isOpen ? 'modal_opened' : ''}`}>
       {isOpen && children}
     </div>
   );

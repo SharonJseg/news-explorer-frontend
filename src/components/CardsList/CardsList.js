@@ -33,26 +33,26 @@ const MOCK_CARDS = [
     text: `Uri Løvevild Golman and Helle Løvevild Golman are National Geographic Explorers and conservation photographers who just completed a project and book they call their love letter to...`,
     source: 'National Geographic',
   },
-  {
-    id: 'c4',
-    keyword: 'Parks',
-    image:
-      'https://images.unsplash.com/photo-1616193362330-893fe1ec39f0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
-    date: 'November 4, 2020',
-    title: `Grand Teton Renews Historic Crest Trail`,
-    text: `“The linking together of the Cascade and Death Canyon trails, at their heads, took place on October 1, 1933, and marked the first step in the realization of a plan whereby the hiker will be...`,
-    source: 'National parks traveler',
-  },
-  {
-    id: 'c5 ',
-    keyword: 'Photography',
-    image:
-      'https://images.unsplash.com/photo-1641739905816-98e62fd6fa27?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMnx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
-    date: 'March 16, 2020',
-    title: `Scientists Don't Know Why Polaris Is So Weird`,
-    text: `Humans have long relied on the starry sky to push into new frontiers, sail to the very edge of the world and find their way back home again. Even animals look to the stars to guide them.`,
-    source: 'treehugger',
-  },
+  // {
+  //   id: 'c4',
+  //   keyword: 'Parks',
+  //   image:
+  //     'https://images.unsplash.com/photo-1616193362330-893fe1ec39f0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
+  //   date: 'November 4, 2020',
+  //   title: `Grand Teton Renews Historic Crest Trail`,
+  //   text: `“The linking together of the Cascade and Death Canyon trails, at their heads, took place on October 1, 1933, and marked the first step in the realization of a plan whereby the hiker will be...`,
+  //   source: 'National parks traveler',
+  // },
+  // {
+  //   id: 'c5 ',
+  //   keyword: 'Photography',
+  //   image:
+  //     'https://images.unsplash.com/photo-1641739905816-98e62fd6fa27?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMnx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
+  //   date: 'March 16, 2020',
+  //   title: `Scientists Don't Know Why Polaris Is So Weird`,
+  //   text: `Humans have long relied on the starry sky to push into new frontiers, sail to the very edge of the world and find their way back home again. Even animals look to the stars to guide them.`,
+  //   source: 'treehugger',
+  // },
 ];
 
 const CardsList = (props) => {

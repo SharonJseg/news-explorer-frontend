@@ -13,6 +13,7 @@ const Card = (props) => {
         {location.pathname === '/saved-news' && (
           <>
             <button className='card__button card__button_type_delete' />
+            <span className='card__tooltip'>Remove from saved</span>
             <span className='card__keyword'>{keyword}</span>
           </>
         )}

@@ -13,7 +13,7 @@ const isNotEmpty = (value) => {
 };
 
 const Form = (props) => {
-  const [modalType, setModalType] = useState('signup');
+  const [modalType, setModalType] = useState('signin');
 
   const {
     value: emailValue,

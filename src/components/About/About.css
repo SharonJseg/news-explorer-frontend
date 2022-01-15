@@ -30,6 +30,19 @@
   margin-top: 24px;
   line-height: 1.333;
 }
+@media screen and (max-width: 1024px) {
+  .about {
+    padding: 80px 60px;
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .about__image {
+    min-width: 250px;
+    height: 250px;
+    margin-top: 21px;
+  }
+}
 
 @media screen and (max-width: 768px) {
   .about {

@@ -8,47 +8,47 @@ const HeaderNavigation = (props) => {
   const location = useLocation();
 
   return (
-    <div className='header-nav__container'>
-      <nav className='header-nav'>
+    <div className='nav'>
+      <nav className='nav__container'>
         <Link
           to='/'
           className={
             location.pathname === '/'
-              ? 'header-nav__title'
-              : 'header-nav__title header-nav__title_black'
+              ? 'nav__title'
+              : 'nav__title nav__title_black'
           }
         >
           NewsExplorer
         </Link>
-        <ul className='header-nav__items'>
-          <li className='header-nav__item '>
+        <ul className='nav__items'>
+          <li className='nav__item '>
             <NavLink
               to='/'
               activeClassName={
-                location.pathname === '/' ? 'header-nav__link_active' : ''
+                location.pathname === '/' ? 'nav__link_active' : ''
               }
               className={
                 location.pathname === '/'
-                  ? 'header-nav__link'
-                  : 'header-nav__link header-nav__link_black'
+                  ? 'nav__link'
+                  : 'nav__link nav__link_black'
               }
             >
               Home
             </NavLink>
           </li>
           {isLoggedIn && (
-            <li className='header-nav__item'>
+            <li className='nav__item'>
               <NavLink
                 to='/saved-news'
                 activeClassName={
                   location.pathname === '/'
-                    ? 'header-nav__link_active'
-                    : 'header-nav__link_active_black'
+                    ? 'nav__link_active'
+                    : 'nav__link_active_black'
                 }
                 className={
                   location.pathname === '/'
-                    ? 'header-nav__link'
-                    : 'header-nav__link header-nav__link_black'
+                    ? 'nav__link'
+                    : 'nav__link nav__link_black'
                 }
               >
                 Saved Articles
@@ -56,13 +56,13 @@ const HeaderNavigation = (props) => {
             </li>
           )}
           {!isLoggedIn && (
-            <li className='header-nav__item'>
+            <li className='nav__item'>
               <button
                 onClick={props.signIn}
                 className={
                   location.pathname === '/'
-                    ? 'header-nav__button'
-                    : 'header-nav__button header-nav__button_black'
+                    ? 'nav__button'
+                    : 'nav__button nav__button_black'
                 }
               >
                 Sign in
@@ -70,17 +70,17 @@ const HeaderNavigation = (props) => {
             </li>
           )}
           {isLoggedIn && (
-            <li className='header-nav__item'>
+            <li className='nav__item'>
               <button
                 className={
                   location.pathname === '/'
-                    ? 'header-nav__signout-button'
-                    : 'header-nav__signout-button header-nav__signout-button_black'
+                    ? 'nav__signout-button'
+                    : 'nav__signout-button nav__signout-button_black'
                 }
               >
                 Sharon
                 <img
-                  className='header-nav__signout-icon'
+                  className='nav__signout-icon'
                   src={location.pathname === '/' ? logoutIcon : logoutIconBlack}
                   alt='logout icon'
                 />

@@ -13,8 +13,8 @@ const Main = (props) => {
 
   return (
     <main className='main'>
-      {/* <NotFound /> */}
-      {/* <Preloader /> */}
+      {/* <NotFound />
+      <Preloader /> */}
       <CardsList isLoggedIn={isLoggedIn} />
       {location.pathname === '/' && <About />}
     </main>
