@@ -27,7 +27,7 @@ const Header = (props) => {
     <>
       <header
         className={
-          location.pathname === '/' ? 'header-home' : 'header-saved-articles'
+          location.pathname === '/' ? 'header' : 'header-saved-articles'
         }
       >
         {screenWidth > 767 ? (

@@ -28,7 +28,7 @@ const Card = (props) => {
         {/* Here I need to add a condition that tests if the card is saved and change the class of the button accordingly from type_bookmark to type_saved */}
         {location.pathname === '/' && isLoggedIn && (
           <>
-            <button className='card__button card__button_type_saved' />
+            <button className='card__button card__button_type_bookmark' />
           </>
         )}
 
