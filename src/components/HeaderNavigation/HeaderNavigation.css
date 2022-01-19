@@ -1,0 +1,146 @@
+.nav {
+  margin: 0 auto;
+  width: 100%;
+  box-shadow: inset 0px -1px 0px #d1d2d6;
+}
+
+.nav__container {
+  max-width: 1232px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 0;
+}
+
+.nav__title {
+  text-decoration: none;
+  font-family: var(--ff-roboto-slab);
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--clr-white);
+  cursor: pointer;
+}
+
+.nav__title_black {
+  color: var(--clr-primary-dark);
+}
+
+.nav__items {
+  font-family: var(--ff-roboto);
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav__link {
+  display: block;
+  text-decoration: none;
+  color: var(--clr-white);
+  font-weight: 500;
+  padding: 0 32px;
+  line-height: 4.3;
+  border-bottom: 3px solid transparent;
+}
+
+.nav__link_black {
+  color: var(--clr-primary-dark);
+}
+
+.nav__link_active {
+  border-bottom: 3px solid var(--clr-white);
+}
+
+.nav__link_active_black {
+  border-bottom: 3px solid var(--clr-primary-dark);
+}
+
+.nav__button {
+  background: none;
+  outline: none;
+  color: var(--clr-white);
+  border: 1px solid var(--clr-white);
+  width: 176px;
+  padding: 12px 0;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.nav__button_black {
+  color: var(--clr-primary-dark);
+  border: 1px solid var(--clr-primary-dark);
+}
+
+.nav__signout-button {
+  background: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--clr-white);
+  font-weight: 500;
+  border: 1px solid var(--clr-white);
+  min-width: 112px;
+  padding: 12px 19px;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.nav__signout-button_black {
+  color: var(--clr-primary-dark);
+  border: 1px solid var(--clr-gray-secondary);
+}
+
+.nav__signout-icon {
+  display: inline;
+  padding-left: 17px;
+}
+
+@media screen and (max-width: 1024px) {
+  .nav__container {
+    width: calc(100% - 40px * 2);
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .nav__items {
+    gap: 10px;
+  }
+
+  .nav__link {
+    padding: 0 18px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .nav {
+    width: calc(100% - 40px * 2);
+  }
+
+  .nav__title {
+    font-size: 20px;
+  }
+
+  .nav__items {
+    gap: 16px;
+  }
+
+  .nav__link {
+    font-size: 16px;
+    padding: 0 24px;
+    line-height: 4;
+  }
+
+  .nav__button {
+    font-size: 16px;
+    width: 152px;
+    padding: 8px 0;
+    border-radius: 100px;
+  }
+
+  .nav__signout-button {
+    font-size: 16px;
+    padding: 8px 19px;
+  }
+}

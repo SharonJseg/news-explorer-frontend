@@ -1,0 +1,11 @@
+.main {
+  background-color: var(--clr-gray-bg);
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 425px) {
+  .main {
+    padding-top: 24px;
+  }
+}

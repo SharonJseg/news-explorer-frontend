@@ -1,0 +1,19 @@
+.header {
+  background-image: url(../../images/georgia-de-lotz--UsJoNxLaNo-unsplash.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 576px;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    min-height: 400px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .header {
+    background-image: url(../../images/mobile_bg.jpg);
+    min-height: 536px;
+  }
+}

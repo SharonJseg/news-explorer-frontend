@@ -1,0 +1,130 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__close-btn {
+  width: 48px;
+  height: 48px;
+  background: url(../../images/close_icon.svg);
+  background-size: contain;
+  position: absolute;
+  top: -45px;
+  right: -45px;
+  padding: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.form__title {
+  font-family: var(--ff-robot);
+  font-weight: 900;
+  font-size: 24px;
+  margin-bottom: 22px;
+}
+
+.form__title_success {
+  margin-bottom: 14px;
+}
+
+.form__label {
+  font-family: var(--ff-inter);
+  font-size: 12px;
+  color: var(--clr-blue);
+  margin-bottom: 9px;
+}
+
+.form__label:not(:first-child) {
+  margin-top: 13px;
+}
+
+.form__input {
+  font-family: var(--ff-inter);
+  font-size: 14px;
+  border: 0;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.2);
+  padding: 0;
+  padding-bottom: 10px;
+  outline: none;
+}
+.form__input:focus {
+  border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.form__input-error {
+  visibility: hidden;
+  font-family: var(--ff-inter);
+  font-size: 12px;
+  line-height: 15px;
+  color: var(--clr-red);
+  padding-top: 3px;
+  height: 14px;
+}
+
+.form__input-error_visible {
+  visibility: visible;
+}
+
+.form__submit-error {
+  visibility: hidden;
+  font-family: var(--ff-inter);
+  font-size: 12px;
+  color: var(--clr-red);
+  align-self: center;
+  margin-bottom: 8px;
+}
+
+.form__submit {
+  font-family: var(--ff-robot);
+  font-weight: 500;
+  line-height: 1.333;
+  background-color: var(--clr-blue);
+  color: var(--clr-white);
+  font-weight: 500;
+  height: 64px;
+  border: none;
+  border-radius: 100px;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
+}
+
+.form__submit:hover {
+  background-color: var(--clr-blue-hover);
+}
+
+.form__submit:active {
+  background-color: var(--clr-blue-active);
+}
+
+.form__submit:disabled {
+  background-color: var(--clr-gray);
+  color: var(--clr-gray-secondary);
+  box-shadow: none;
+  cursor: default;
+}
+
+.form__switch {
+  font-family: var(--ff-inter);
+  font-size: 14px;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.form__switch-button {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--clr-blue);
+}
+
+@media screen and (max-width: 425px) {
+  .form__close-btn {
+    width: 24px;
+    height: 24px;
+    top: -41px;
+    right: 15px;
+  }
+}
