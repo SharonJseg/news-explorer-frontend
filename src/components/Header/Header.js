@@ -16,6 +16,7 @@ const Header = (props) => {
     isMobileMenuOpen,
     handleOpenMenu,
     isLoggedIn,
+    onLogout,
   } = props;
   const location = useLocation();
 
@@ -31,7 +32,11 @@ const Header = (props) => {
         }
       >
         {screenWidth > 767 ? (
-          <HeaderNavigation isLoggedIn={isLoggedIn} signIn={onSignInClick} />
+          <HeaderNavigation
+            isLoggedIn={isLoggedIn}
+            signIn={onSignInClick}
+            onLogout={onLogout}
+          />
         ) : (
           <MobileNav
             isMobileMenuOpen={isMobileMenuOpen}
@@ -39,6 +44,7 @@ const Header = (props) => {
             signIn={onSignInClick}
             toggleMenu={handleOpenMenu}
             isLoggedIn={isLoggedIn}
+            onLogout={onLogout}
           />
         )}
         {location.pathname === '/' && <SearchForm />}

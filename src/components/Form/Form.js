@@ -13,6 +13,14 @@ const isNotEmpty = (value) => {
 };
 
 const Form = (props) => {
+  const {
+    onClose,
+    onHandleSubmitLogin,
+    onHandleSubmitRegister,
+    onRegisterFail,
+    onLoginFail,
+    onToggleForm,
+  } = props;
   const [modalType, setModalType] = useState('signin');
 
   const {
@@ -67,6 +75,7 @@ const Form = (props) => {
       setModalType('signin');
       resetForm();
     }
+    onToggleForm();
   };
 
   const handleSubmitLogin = (evt) => {
@@ -74,7 +83,7 @@ const Form = (props) => {
     if (!isSigninFormValid) {
       return;
     }
-    console.log({ email: emailValue, password: passwordValue });
+    onHandleSubmitLogin({ email: emailValue, password: passwordValue });
   };
 
   const handleSubmitRegister = (evt) => {
@@ -82,12 +91,14 @@ const Form = (props) => {
     if (!isSignupFormValid) {
       return;
     }
-    console.log({
+    onHandleSubmitRegister({
       email: emailValue,
       password: passwordValue,
-      username: usernameValue,
+      name: usernameValue,
     });
-    setModalType('success');
+    if (onRegisterFail) {
+      setModalType('success');
+    }
   };
 
   return (
@@ -95,11 +106,11 @@ const Form = (props) => {
       <button
         aria-label='close button'
         className='form__close-btn'
-        onClick={props.onClose}
+        onClick={onClose}
       />
       <h2
         className={`form__title ${
-          modalType === 'success' ? 'form__title_success' : ''
+          modalType === 'success' ? 'form__title_response' : ''
         }`}
       >
         {modalType === 'success'
@@ -183,9 +194,17 @@ const Form = (props) => {
               </span>
             </>
           )}
-          <span className='form__submit-error'>
-            This username is not available
-          </span>
+          {onLoginFail && (
+            <span className='form__submit-error'>
+              The username or password are not correct
+            </span>
+          )}
+          {onRegisterFail && (
+            <span className='form__submit-error'>
+              Something went wrong, please try again
+            </span>
+          )}
+
           {modalType === 'signin' ? (
             <button className='form__submit' disabled={!isSigninFormValid}>
               Sign in

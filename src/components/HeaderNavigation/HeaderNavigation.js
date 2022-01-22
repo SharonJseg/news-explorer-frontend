@@ -72,6 +72,7 @@ const HeaderNavigation = (props) => {
           {isLoggedIn && (
             <li className='nav__item'>
               <button
+                onClick={props.onLogout}
                 className={
                   location.pathname === '/'
                     ? 'nav__signout-button'

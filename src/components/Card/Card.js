@@ -5,8 +5,6 @@ const Card = (props) => {
   const { keyword, image, date, title, text, source, isLoggedIn } = props;
   const location = useLocation();
 
-  console.log(isLoggedIn);
-
   return (
     <>
       <li className='card'>
