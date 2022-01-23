@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import useInput from '../../hooks/use-input';
 import './Form.css';
 
@@ -19,9 +19,10 @@ const Form = (props) => {
     onHandleSubmitRegister,
     onRegisterFail,
     onLoginFail,
-    onToggleForm,
+    modalType,
+    onSignInClick,
+    onRegisterClick,
   } = props;
-  const [modalType, setModalType] = useState('signin');
 
   const {
     value: emailValue,
@@ -61,22 +62,15 @@ const Form = (props) => {
     isSignupFormValid = true;
   }
 
-  const resetForm = () => {
+  const resetForm = useCallback(() => {
     resetEmail();
     resetPassword();
     resetUserName();
-  };
+  }, []);
 
-  const handleSwitch = () => {
-    if (modalType === 'signin') {
-      setModalType('signup');
-      resetForm();
-    } else {
-      setModalType('signin');
-      resetForm();
-    }
-    onToggleForm();
-  };
+  useEffect(() => {
+    resetForm();
+  }, [modalType, resetForm]);
 
   const handleSubmitLogin = (evt) => {
     evt.preventDefault();
@@ -96,9 +90,6 @@ const Form = (props) => {
       password: passwordValue,
       name: usernameValue,
     });
-    if (onRegisterFail) {
-      setModalType('success');
-    }
   };
 
   return (
@@ -219,12 +210,18 @@ const Form = (props) => {
       {modalType !== 'success' ? (
         <p className='form__switch'>
           or{' '}
-          <button onClick={handleSwitch} className='form__switch-button'>
+          <button
+            onClick={modalType === 'signin' ? onRegisterClick : onSignInClick}
+            className='form__switch-button'
+          >
             {`Sign ${modalType === 'signin' ? 'up' : 'in'}`}
           </button>
         </p>
       ) : (
-        <button onClick={handleSwitch} className='form__switch-button'>
+        <button
+          onClick={modalType === 'signin' ? onRegisterClick : onSignInClick}
+          className='form__switch-button'
+        >
           Sign in
         </button>
       )}

@@ -40,6 +40,19 @@ class MainApi {
       body: JSON.stringify({ email, password, name }),
     }).then((res) => this._handleResponse(res));
   }
+
+  getUserInfo(token) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => this._handleResponse(res))
+      .then((data) => data);
+  }
 }
 
 const mainApi = new MainApi({

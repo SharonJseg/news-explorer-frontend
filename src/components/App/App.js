@@ -1,7 +1,7 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './App.css';
 
 import Header from '../Header/Header';
@@ -21,21 +21,16 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem('jwt'));
   const [registerFailedMessage, setRegisterFailedMessage] = useState(false);
   const [loginFailedMessage, setLoginFailedMessage] = useState(false);
-  // I added a logged in state for you to see the styles change from the browser react components tab. will add the functionality in the next part
+  const [modalType, setModalType] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState('');
   const history = useHistory();
 
-  const resetFormErrors = () => {
-    setLoginFailedMessage(false);
-    setRegisterFailedMessage(false);
-  };
-
-  const handleOpenModal = () => {
-    setModalIsOpen(true);
-    setShowMobileMenu(false);
-    setLoginFailedMessage('');
-    setRegisterFailedMessage('');
-  };
+  // const handleOpenModal = () => {
+  //   setModalIsOpen(true);
+  //   setShowMobileMenu(false);
+  //   setLoginFailedMessage(false);
+  //   setRegisterFailedMessage(false);
+  // };
 
   const handleToggleMenu = () => {
     setShowMobileMenu(!showMobileMenu);
@@ -49,14 +44,27 @@ function App() {
     setScreenWidth(window.innerWidth);
   };
 
+  const handleLoginButton = () => {
+    setModalType('signin');
+    setModalIsOpen(true);
+    setShowMobileMenu(false);
+    setRegisterFailedMessage(false);
+    setLoginFailedMessage(false);
+  };
+  const handleRegisterButton = () => {
+    setModalType('signup');
+    setRegisterFailedMessage(false);
+    setLoginFailedMessage(false);
+  };
+
   const handleSubmitLogin = ({ email, password }) => {
-    console.log(email, password);
     mainApi
       .login(email, password)
       .then((res) => {
         setToken(res.token);
         setIsLoggedIn(true);
         handleCloseModal();
+        setLoginFailedMessage(false);
       })
       .catch((err) => {
         console.log(err);
@@ -69,6 +77,7 @@ function App() {
       .register(email, password, name)
       .then((data) => {
         console.log(data);
+        setModalType('success');
       })
       .catch((err) => {
         setRegisterFailedMessage(true);
@@ -79,8 +88,24 @@ function App() {
   const handleLogOut = () => {
     localStorage.removeItem('jwt');
     setIsLoggedIn(false);
+    setShowMobileMenu(false);
     history.push('/');
   };
+
+  useEffect(() => {
+    if (token) {
+      mainApi
+        .getUserInfo(token)
+        .then((res) => {
+          setIsLoggedIn(true);
+          setCurrentUser(res.data);
+          console.log(res.data);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [token]);
 
   useEffect(() => {
     const closeByEsc = (evt) => {
@@ -94,11 +119,12 @@ function App() {
   }, []);
 
   return (
-    <>
-      <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={currentUser}>
+      <>
         <Header
           handleScreenResize={handleScreenSize}
-          onSignInClick={handleOpenModal}
+          onSignInClick={handleLoginButton}
+          // onSignInClick={handleOpenModal}
           screenWidth={screenWidth}
           isLoggedIn={isLoggedIn}
           modalIsOpen={modalIsOpen}
@@ -128,11 +154,13 @@ function App() {
             onHandleSubmitRegister={handleSubmitRegister}
             onLoginFail={loginFailedMessage}
             onRegisterFail={registerFailedMessage}
-            onToggleForm={resetFormErrors}
+            modalType={modalType}
+            onSignInClick={handleLoginButton}
+            onRegisterClick={handleRegisterButton}
           />
         </Modal>
-      </CurrentUserContext.Provider>
-    </>
+      </>
+    </CurrentUserContext.Provider>
   );
 }
 

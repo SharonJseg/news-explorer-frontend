@@ -1,11 +1,12 @@
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+
 import HeaderNavigation from '../HeaderNavigation/HeaderNavigation';
 import MobileNav from '../MobileNav/MobileNav';
 import SearchForm from '../SearchForm/SearchForm';
 import SavedHeader from '../SavedHeader/SavedHeader';
 
 import './Header.css';
-import { useEffect } from 'react';
 
 const Header = (props) => {
   const {

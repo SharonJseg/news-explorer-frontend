@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 
 import './MobileNav.css';
@@ -6,11 +8,12 @@ import mobileMenuDark from '../../images/mobile_menu_icon_dark.svg';
 import mobileCloseMenu from '../../images/mobile_menu_close_icon.svg';
 import mobileCloseMenuDark from '../../images/mobile_menu_close_icon_dark.svg';
 import logoutIcon from '../../images/logout_white.svg';
-import logoutIconBlack from '../../images/logout_black.svg';
+// import logoutIconBlack from '../../images/logout_black.svg';
 
 const MobileNav = (props) => {
   const { isModalOpen, isMobileMenuOpen, toggleMenu, isLoggedIn } = props;
   const location = useLocation();
+  const userContext = useContext(CurrentUserContext).data;
 
   return (
     <div className='mobile-nav__container'>
@@ -120,7 +123,7 @@ const MobileNav = (props) => {
                     onClick={props.onLogout}
                     className='mobile-nav__signout'
                   >
-                    Sharon
+                    {userContext.name}
                     <img
                       className='nav__signout-icon'
                       src={logoutIcon}

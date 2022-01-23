@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import './HeaderNavigation.css';
 import logoutIcon from '../../images/logout_white.svg';
@@ -6,6 +8,7 @@ import logoutIconBlack from '../../images/logout_black.svg';
 const HeaderNavigation = (props) => {
   const { isLoggedIn } = props;
   const location = useLocation();
+  const userContext = useContext(CurrentUserContext);
 
   return (
     <div className='nav'>
@@ -79,7 +82,7 @@ const HeaderNavigation = (props) => {
                     : 'nav__signout-button nav__signout-button_black'
                 }
               >
-                Sharon
+                {userContext.name}
                 <img
                   className='nav__signout-icon'
                   src={location.pathname === '/' ? logoutIcon : logoutIconBlack}
