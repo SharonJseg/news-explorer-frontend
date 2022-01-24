@@ -11,15 +11,23 @@ import logoutIcon from '../../images/logout_white.svg';
 // import logoutIconBlack from '../../images/logout_black.svg';
 
 const MobileNav = (props) => {
-  const { isModalOpen, isMobileMenuOpen, toggleMenu, isLoggedIn } = props;
+  const {
+    isModalOpen,
+    isMobileMenuOpen,
+    toggleMenu,
+    isLoggedIn,
+    onSavedNewsClick,
+    onHomePageClick,
+  } = props;
   const location = useLocation();
-  const userContext = useContext(CurrentUserContext).data;
+  const userContext = useContext(CurrentUserContext);
 
   return (
     <div className='mobile-nav__container'>
       {isMobileMenuOpen === false ? (
         <nav className='mobile-nav'>
           <Link
+            onClick={onHomePageClick}
             to='/'
             className={
               location.pathname === '/'
@@ -59,7 +67,7 @@ const MobileNav = (props) => {
         </nav>
       ) : (
         <nav className='mobile-nav mobile-nav_open'>
-          <Link to='/' className='mobile-nav__title'>
+          <Link onClick={onHomePageClick} to='/' className='mobile-nav__title'>
             NewsExplorer
           </Link>
           <button
@@ -93,7 +101,7 @@ const MobileNav = (props) => {
             <ul className='mobile-nav__items'>
               <li className='mobile-nav__item'>
                 <NavLink
-                  onClick={toggleMenu}
+                  onClick={onHomePageClick}
                   to='/'
                   className='mobile-nav__link'
                 >
@@ -103,7 +111,7 @@ const MobileNav = (props) => {
               {isLoggedIn && (
                 <li className='mobile-nav__item'>
                   <NavLink
-                    onClick={toggleMenu}
+                    onClick={onSavedNewsClick}
                     to='/saved-news'
                     className='mobile-nav__link'
                   >

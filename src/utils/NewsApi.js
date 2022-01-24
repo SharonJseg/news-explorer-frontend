@@ -1,42 +1,24 @@
-import { NEWS_URL, PROXY_URL, API_KEY, SEARCH_INT } from './constants';
+import { NEWS_URL, API_KEY, SEARCH_INT } from './constants';
 
-class NewsApi {
-  constructor(optionsObj) {
-    this.headers = optionsObj.headers;
-    this.apiKey = optionsObj.apiKey;
-    this.currentDay = optionsObj.currentDay;
-    this.lastWeek = optionsObj.lastWeek;
-    this.newsURL = optionsObj.newsUrl;
-    this.practiUrl = optionsObj.practiUrl;
+const handleResponse = (res) => {
+  if (res.ok) {
+    return res.json();
   }
+  return Promise.reject(`${res.status}: ${res.statusText}`);
+};
 
-  getArticles(searchWord) {
-    return fetch(
-      `${this.newsURL}/v2/everything?q=${searchWord}` +
-        `&from=${this.lastWeek.toISOString()}` +
-        `&to=${this.currentDay.toISOString()}` +
-        `&sortBy=popularity&pageSize=100&apiKey=${this.apiKey}`,
-      {
-        headers: {
-          'Content-type': 'application/json',
-        },
-      },
-    )
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
-      .then((data) => data.articles);
-  }
-}
+const date = new Date();
+const last = new Date(date.getTime() - SEARCH_INT);
+const day = last.getDate();
+const month = last.getMonth() + 1;
+const year = last.getFullYear();
 
-const newsApi = new NewsApi({
-  newsURL: NEWS_URL,
-  currentDay: new Date(),
-  apiKey: API_KEY,
-  lastWeek: new Date(Date.now() - SEARCH_INT),
-  practiUrl: PROXY_URL,
-});
+const from = year + '/' + month + '/' + day;
+const to = date;
+const pageSize = '100';
 
-export default newsApi;
+export const getArticles = (searchWord) => {
+  return fetch(
+    `${NEWS_URL}?q=${searchWord}&apiKey=${API_KEY}&from=${from}&to=${to}&pageSize=${pageSize}`,
+  ).then((res) => handleResponse(res));
+};

@@ -10,31 +10,28 @@ import Footer from '../Footer/Footer';
 import Modal from '../Modal/Modal';
 import Form from '../Form/Form';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import SavedArticles from '../SavedArticles/SavedArticles';
 import mainApi from '../../utils/MainApi';
+import * as newsApi from '../../utils/NewsApi';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [searchIsOpen, setSearchIsOpen] = useState(false);
   const [searchWord, setSearchWord] = useState('');
+  const [noArticlesFound, setNoArticlesFound] = useState(false);
+  const [loader, setLoader] = useState(false);
+  const [articleCards, setArticleCards] = useState([]);
+  const [savedArticles, setSavedArticles] = useState([]);
   const [token, setToken] = useState(localStorage.getItem('jwt'));
   const [registerFailedMessage, setRegisterFailedMessage] = useState(false);
   const [loginFailedMessage, setLoginFailedMessage] = useState(false);
   const [modalType, setModalType] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedInSavedNews, setIsLoggedInSavedNews] = useState(false);
   const history = useHistory();
-
-  // const handleOpenModal = () => {
-  //   setModalIsOpen(true);
-  //   setShowMobileMenu(false);
-  //   setLoginFailedMessage(false);
-  //   setRegisterFailedMessage(false);
-  // };
-
-  const handleToggleMenu = () => {
-    setShowMobileMenu(!showMobileMenu);
-  };
 
   const handleCloseModal = () => {
     setModalIsOpen(false);
@@ -50,6 +47,7 @@ function App() {
     setShowMobileMenu(false);
     setRegisterFailedMessage(false);
     setLoginFailedMessage(false);
+    setIsLoggedInSavedNews(false);
   };
   const handleRegisterButton = () => {
     setModalType('signup');
@@ -89,7 +87,91 @@ function App() {
     localStorage.removeItem('jwt');
     setIsLoggedIn(false);
     setShowMobileMenu(false);
+    setSearchIsOpen(false);
     history.push('/');
+  };
+
+  const handleSearch = (searchWord) => {
+    setSearchWord(searchWord);
+    setLoader(true);
+    setNoArticlesFound(false);
+    setSearchIsOpen(false);
+    newsApi
+      .getArticles(searchWord)
+      .then((articleArray) => {
+        setLoader(false);
+        if (articleArray.articles.length > 0) {
+          setArticleCards(articleArray.articles);
+          articleArray.articles.map((cardObj) => (cardObj.marked = 'false'));
+          setSearchIsOpen(true);
+        } else {
+          setNoArticlesFound(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoader(false);
+        setSearchIsOpen(false);
+      });
+  };
+
+  const deleteArticle = (article) => {
+    mainApi
+      .deleteArticle(article._id, token)
+      .then(() => {
+        setSavedArticles((articleArray) =>
+          articleArray.filter((a) => a._id !== article._id),
+        );
+        setArticleCards((articleState) =>
+          articleState.map((a) =>
+            a.title === article.title ? { ...a, marked: 'false' } : a,
+          ),
+        );
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleSaveCard = (card) => {
+    if (isLoggedIn) {
+      if (card.owner === currentUser._id || card.marked === 'true') {
+        if (card.marked === 'true') {
+          const foundSavedArticle = savedArticles.find(
+            (f) => f.title === card.title,
+          );
+          deleteArticle(foundSavedArticle);
+        } else {
+          deleteArticle(card);
+        }
+      } else {
+        mainApi
+          .saveArticle(token, card, searchWord)
+          .then((newArticle) => {
+            setSavedArticles([...savedArticles, newArticle]);
+            setArticleCards((state) =>
+              state.map((c) =>
+                c.title === card.title ? { ...c, marked: 'true' } : c,
+              ),
+            );
+          })
+          .catch((err) => console.log(err));
+      }
+    } else {
+      handleLoginButton();
+    }
+  };
+
+  const handleToggleMenu = () => {
+    setShowMobileMenu(!showMobileMenu);
+  };
+
+  const handleLoggedInSavedNewsClick = () => {
+    setIsLoggedInSavedNews(true);
+    handleToggleMenu();
+  };
+
+  const handleAtHomeClick = () => {
+    setIsLoggedInSavedNews(false);
+    handleToggleMenu();
   };
 
   useEffect(() => {
@@ -99,11 +181,18 @@ function App() {
         .then((res) => {
           setIsLoggedIn(true);
           setCurrentUser(res.data);
-          console.log(res.data);
         })
         .catch((err) => console.log(err));
     } else {
       setIsLoggedIn(false);
+    }
+  }, [token, savedArticles]);
+
+  useEffect(() => {
+    if (token) {
+      mainApi.getUserArticles(token).then((res) => {
+        setSavedArticles(res);
+      });
     }
   }, [token]);
 
@@ -124,24 +213,37 @@ function App() {
         <Header
           handleScreenResize={handleScreenSize}
           onSignInClick={handleLoginButton}
-          // onSignInClick={handleOpenModal}
           screenWidth={screenWidth}
           isLoggedIn={isLoggedIn}
           modalIsOpen={modalIsOpen}
           isMobileMenuOpen={showMobileMenu}
           handleOpenMenu={handleToggleMenu}
           onLogout={handleLogOut}
+          onSearchClick={handleSearch}
+          onSavedNewsClick={handleLoggedInSavedNewsClick}
+          onHomePageClick={handleAtHomeClick}
+          savedArticles={savedArticles}
         />
         <Switch>
           <Route exact path='/'>
-            <Main isLoggedIn={isLoggedIn} />
+            <Main
+              isLoggedIn={isLoggedIn}
+              searchIsOpen={searchIsOpen}
+              isLoaderOpen={loader}
+              isNotFound={noArticlesFound}
+              articles={articleCards}
+              onSaveCardClick={handleSaveCard}
+              isLoggedInSavedNews={isLoggedInSavedNews}
+            />
           </Route>
-          <ProtectedRoute
-            path='/saved-news'
-            exact
-            component={Main}
-            isLoggedIn={isLoggedIn}
-          />
+          <ProtectedRoute exact isLoggedIn={isLoggedIn} path='/saved-news'>
+            <SavedArticles
+              isLoggedIn={isLoggedIn}
+              onSaveCardClick={handleSaveCard}
+              savedArticles={savedArticles}
+              isLoggedInSavedNews={isLoggedInSavedNews}
+            />
+          </ProtectedRoute>
           <Route path='/'>
             <Redirect to='/' />
           </Route>

@@ -18,6 +18,10 @@ const Header = (props) => {
     handleOpenMenu,
     isLoggedIn,
     onLogout,
+    onSearchClick,
+    onSavedNewsClick,
+    onHomePageClick,
+    savedArticles,
   } = props;
   const location = useLocation();
 
@@ -37,6 +41,8 @@ const Header = (props) => {
             isLoggedIn={isLoggedIn}
             signIn={onSignInClick}
             onLogout={onLogout}
+            onSavedNewsClick={onSavedNewsClick}
+            onHomePageClick={onHomePageClick}
           />
         ) : (
           <MobileNav
@@ -46,12 +52,16 @@ const Header = (props) => {
             toggleMenu={handleOpenMenu}
             isLoggedIn={isLoggedIn}
             onLogout={onLogout}
+            onSavedNewsClick={onSavedNewsClick}
+            onHomePageClick={onHomePageClick}
           />
         )}
-        {location.pathname === '/' && <SearchForm />}
+        {location.pathname === '/' && (
+          <SearchForm onSearchClick={onSearchClick} />
+        )}
 
         {location.pathname === '/saved-news' && (
-          <SavedHeader isloggedIn={isLoggedIn} />
+          <SavedHeader isloggedIn={isLoggedIn} savedArticles={savedArticles} />
         )}
       </header>
     </>

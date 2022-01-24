@@ -53,6 +53,45 @@ class MainApi {
       .then((res) => this._handleResponse(res))
       .then((data) => data);
   }
+
+  getUserArticles(token) {
+    return fetch(`${this._baseUrl}/articles`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => this._handleResponse(res));
+  }
+
+  saveArticle(token, data, searchWord) {
+    return fetch(`${this._baseUrl}/articles`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        keyword: searchWord,
+        title: data.title,
+        text: data.description,
+        date: data.publishedAt,
+        source: data.source.name,
+        link: data.url,
+        image: data.urlToImage,
+      }),
+    }).then((res) => this._handleResponse(res));
+  }
+
+  deleteArticle(articleId, token) {
+    return fetch(`${this._baseUrl}/articles/${articleId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => this._handleResponse(res));
+  }
 }
 
 const mainApi = new MainApi({
