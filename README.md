@@ -1,4 +1,4 @@
-# News-Explorer-API
+# News-Explorer-Frontend
 
 This is the frontend of my news article collection React application, the final project in Practicum by Yandex's web development curriculum.
 
