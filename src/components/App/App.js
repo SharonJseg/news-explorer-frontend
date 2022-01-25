@@ -177,6 +177,17 @@ function App() {
   useEffect(() => {
     if (token) {
       mainApi
+        .getUserArticles(token)
+        .then((res) => {
+          setSavedArticles(res);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [token]);
+
+  useEffect(() => {
+    if (token) {
+      mainApi
         .getUserInfo(token)
         .then((res) => {
           setIsLoggedIn(true);
@@ -187,14 +198,6 @@ function App() {
       setIsLoggedIn(false);
     }
   }, [token, savedArticles]);
-
-  useEffect(() => {
-    if (token) {
-      mainApi.getUserArticles(token).then((res) => {
-        setSavedArticles(res);
-      });
-    }
-  }, [token]);
 
   useEffect(() => {
     const closeByEsc = (evt) => {
@@ -209,59 +212,57 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <>
-        <Header
-          handleScreenResize={handleScreenSize}
-          onSignInClick={handleLoginButton}
-          screenWidth={screenWidth}
-          isLoggedIn={isLoggedIn}
-          modalIsOpen={modalIsOpen}
-          isMobileMenuOpen={showMobileMenu}
-          handleOpenMenu={handleToggleMenu}
-          onLogout={handleLogOut}
-          onSearchClick={handleSearch}
-          onSavedNewsClick={handleLoggedInSavedNewsClick}
-          onHomePageClick={handleAtHomeClick}
-          savedArticles={savedArticles}
-        />
-        <Switch>
-          <Route exact path='/'>
-            <Main
-              isLoggedIn={isLoggedIn}
-              searchIsOpen={searchIsOpen}
-              isLoaderOpen={loader}
-              isNotFound={noArticlesFound}
-              articles={articleCards}
-              onSaveCardClick={handleSaveCard}
-              isLoggedInSavedNews={isLoggedInSavedNews}
-            />
-          </Route>
-          <ProtectedRoute exact isLoggedIn={isLoggedIn} path='/saved-news'>
-            <SavedArticles
-              isLoggedIn={isLoggedIn}
-              onSaveCardClick={handleSaveCard}
-              savedArticles={savedArticles}
-              isLoggedInSavedNews={isLoggedInSavedNews}
-            />
-          </ProtectedRoute>
-          <Route path='/'>
-            <Redirect to='/' />
-          </Route>
-        </Switch>
-        <Footer />
-        <Modal isOpen={modalIsOpen} onClose={handleCloseModal}>
-          <Form
-            onClose={handleCloseModal}
-            onHandleSubmitLogin={handleSubmitLogin}
-            onHandleSubmitRegister={handleSubmitRegister}
-            onLoginFail={loginFailedMessage}
-            onRegisterFail={registerFailedMessage}
-            modalType={modalType}
-            onSignInClick={handleLoginButton}
-            onRegisterClick={handleRegisterButton}
+      <Header
+        handleScreenResize={handleScreenSize}
+        onSignInClick={handleLoginButton}
+        screenWidth={screenWidth}
+        isLoggedIn={isLoggedIn}
+        modalIsOpen={modalIsOpen}
+        isMobileMenuOpen={showMobileMenu}
+        handleOpenMenu={handleToggleMenu}
+        onLogout={handleLogOut}
+        onSearchClick={handleSearch}
+        onSavedNewsClick={handleLoggedInSavedNewsClick}
+        onHomePageClick={handleAtHomeClick}
+        savedArticles={savedArticles}
+      />
+      <Switch>
+        <Route exact path='/'>
+          <Main
+            isLoggedIn={isLoggedIn}
+            searchIsOpen={searchIsOpen}
+            isLoaderOpen={loader}
+            isNotFound={noArticlesFound}
+            articles={articleCards}
+            onSaveCardClick={handleSaveCard}
+            isLoggedInSavedNews={isLoggedInSavedNews}
           />
-        </Modal>
-      </>
+        </Route>
+        <ProtectedRoute exact isLoggedIn={isLoggedIn} path='/saved-news'>
+          <SavedArticles
+            isLoggedIn={isLoggedIn}
+            onSaveCardClick={handleSaveCard}
+            savedArticles={savedArticles}
+            isLoggedInSavedNews={isLoggedInSavedNews}
+          />
+        </ProtectedRoute>
+        <Route path='/'>
+          <Redirect to='/' />
+        </Route>
+      </Switch>
+      <Footer />
+      <Modal isOpen={modalIsOpen} onClose={handleCloseModal}>
+        <Form
+          onClose={handleCloseModal}
+          onHandleSubmitLogin={handleSubmitLogin}
+          onHandleSubmitRegister={handleSubmitRegister}
+          onLoginFail={loginFailedMessage}
+          onRegisterFail={registerFailedMessage}
+          modalType={modalType}
+          onSignInClick={handleLoginButton}
+          onRegisterClick={handleRegisterButton}
+        />
+      </Modal>
     </CurrentUserContext.Provider>
   );
 }

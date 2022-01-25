@@ -6,19 +6,20 @@ const SavedHeader = (props) => {
   const { savedArticles } = props;
   const userContext = useContext(CurrentUserContext);
 
-  const keyWordString = () => {};
-
-  const keyWords = savedArticles.map((data) => data.keyword + ', ');
+  const userArticles = savedArticles.filter(
+    (card) => card.owner === userContext._id,
+  );
+  const keyWords = userArticles.map((data) => data.keyword + ', ');
   const wordList = [...new Set(keyWords)];
 
   return (
     <section className='saved-news-header'>
       <p className='saved-news-header__title'>Saved articles</p>
       <h2 className='saved-news-header__greet'>
-        {userContext.name}, you have {savedArticles.length} saved articles
+        {userContext.name}, you have {userArticles.length} saved articles
       </h2>
       <p className='saved-news-header__keyword-list'>
-        By keywords:{' '}
+        {userArticles.length > 0 && `By keywords:`}
         <span className='saved-news-header__keywords'>
           {`${
             wordList.length > 3
