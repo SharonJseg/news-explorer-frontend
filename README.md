@@ -4,6 +4,8 @@ This is the frontend of my news article collection React application, the final 
 
 You can find the Backend (Express & MongoDB) repo [here](https://github.com/SharonJseg/news-explorer-api)
 
+The link to my [deployed App](https://www.sharonews.students.nomoreparties.sbs)
+
 ## Project Features
 
 - User authentication.
