@@ -1,4 +1,4 @@
-import { NEWS_URL, API_KEY, SEARCH_INT } from './constants';
+import { NEWS_URL, PROXY_URL, API_KEY, SEARCH_INT } from './constants';
 
 const handleResponse = (res) => {
   if (res.ok) {
@@ -19,6 +19,6 @@ const pageSize = '100';
 
 export const getArticles = (searchWord) => {
   return fetch(
-    `${NEWS_URL}?q=${searchWord}&apiKey=${API_KEY}&from=${from}&to=${to}&pageSize=${pageSize}`,
+    `${PROXY_URL}?q=${searchWord}&apiKey=${API_KEY}&from=${from}&to=${to}&pageSize=${pageSize}`,
   ).then((res) => handleResponse(res));
 };
