@@ -1,11 +1,12 @@
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+
 import HeaderNavigation from '../HeaderNavigation/HeaderNavigation';
 import MobileNav from '../MobileNav/MobileNav';
 import SearchForm from '../SearchForm/SearchForm';
 import SavedHeader from '../SavedHeader/SavedHeader';
 
 import './Header.css';
-import { useEffect } from 'react';
 
 const Header = (props) => {
   const {
@@ -16,6 +17,11 @@ const Header = (props) => {
     isMobileMenuOpen,
     handleOpenMenu,
     isLoggedIn,
+    onLogout,
+    onSearchClick,
+    onSavedNewsClick,
+    onHomePageClick,
+    savedArticles,
   } = props;
   const location = useLocation();
 
@@ -31,7 +37,13 @@ const Header = (props) => {
         }
       >
         {screenWidth > 767 ? (
-          <HeaderNavigation isLoggedIn={isLoggedIn} signIn={onSignInClick} />
+          <HeaderNavigation
+            isLoggedIn={isLoggedIn}
+            signIn={onSignInClick}
+            onLogout={onLogout}
+            onSavedNewsClick={onSavedNewsClick}
+            onHomePageClick={onHomePageClick}
+          />
         ) : (
           <MobileNav
             isMobileMenuOpen={isMobileMenuOpen}
@@ -39,12 +51,17 @@ const Header = (props) => {
             signIn={onSignInClick}
             toggleMenu={handleOpenMenu}
             isLoggedIn={isLoggedIn}
+            onLogout={onLogout}
+            onSavedNewsClick={onSavedNewsClick}
+            onHomePageClick={onHomePageClick}
           />
         )}
-        {location.pathname === '/' && <SearchForm />}
+        {location.pathname === '/' && (
+          <SearchForm onSearchClick={onSearchClick} />
+        )}
 
         {location.pathname === '/saved-news' && (
-          <SavedHeader isloggedIn={isLoggedIn} />
+          <SavedHeader isloggedIn={isLoggedIn} savedArticles={savedArticles} />
         )}
       </header>
     </>

@@ -150,6 +150,12 @@
   -webkit-box-orient: vertical; */
 }
 
+.card__description {
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--clr-primary-dark);
+}
+
 @media screen and (max-width: 768px) {
   .card {
     width: 224px;

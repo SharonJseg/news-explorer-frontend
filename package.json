@@ -16,7 +16,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "npm run build && scp -r ./build/* sharon.j.segal@sharonews.students.nomoreparties.sbs:/home/sharon.j.segal/frontend"
   },
   "eslintConfig": {
     "extends": [

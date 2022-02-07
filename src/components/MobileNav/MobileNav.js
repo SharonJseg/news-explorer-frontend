@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 
 import './MobileNav.css';
@@ -5,16 +7,27 @@ import mobileMenuIcon from '../../images/mobile_menu_icon.svg';
 import mobileMenuDark from '../../images/mobile_menu_icon_dark.svg';
 import mobileCloseMenu from '../../images/mobile_menu_close_icon.svg';
 import mobileCloseMenuDark from '../../images/mobile_menu_close_icon_dark.svg';
+import logoutIcon from '../../images/logout_white.svg';
+// import logoutIconBlack from '../../images/logout_black.svg';
 
 const MobileNav = (props) => {
-  const { isModalOpen, isMobileMenuOpen, toggleMenu, isLoggedIn } = props;
+  const {
+    isModalOpen,
+    isMobileMenuOpen,
+    toggleMenu,
+    isLoggedIn,
+    onSavedNewsClick,
+    onHomePageClick,
+  } = props;
   const location = useLocation();
+  const userContext = useContext(CurrentUserContext);
 
   return (
     <div className='mobile-nav__container'>
       {isMobileMenuOpen === false ? (
         <nav className='mobile-nav'>
           <Link
+            onClick={onHomePageClick}
             to='/'
             className={
               location.pathname === '/'
@@ -54,7 +67,7 @@ const MobileNav = (props) => {
         </nav>
       ) : (
         <nav className='mobile-nav mobile-nav_open'>
-          <Link to='/' className='mobile-nav__title'>
+          <Link onClick={onHomePageClick} to='/' className='mobile-nav__title'>
             NewsExplorer
           </Link>
           <button
@@ -88,7 +101,7 @@ const MobileNav = (props) => {
             <ul className='mobile-nav__items'>
               <li className='mobile-nav__item'>
                 <NavLink
-                  onClick={toggleMenu}
+                  onClick={onHomePageClick}
                   to='/'
                   className='mobile-nav__link'
                 >
@@ -98,7 +111,7 @@ const MobileNav = (props) => {
               {isLoggedIn && (
                 <li className='mobile-nav__item'>
                   <NavLink
-                    onClick={toggleMenu}
+                    onClick={onSavedNewsClick}
                     to='/saved-news'
                     className='mobile-nav__link'
                   >
@@ -106,10 +119,24 @@ const MobileNav = (props) => {
                   </NavLink>
                 </li>
               )}
-              {!isLoggedIn && (
+              {!isLoggedIn ? (
                 <li className='mobile-nav__item'>
                   <button onClick={props.signIn} className='mobile-nav__signin'>
                     Sign in
+                  </button>
+                </li>
+              ) : (
+                <li className='mobile-nav__item'>
+                  <button
+                    onClick={props.onLogout}
+                    className='mobile-nav__signout'
+                  >
+                    {userContext.name}
+                    <img
+                      className='nav__signout-icon'
+                      src={logoutIcon}
+                      alt='logout icon'
+                    />
                   </button>
                 </li>
               )}

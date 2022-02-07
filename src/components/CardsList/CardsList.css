@@ -8,6 +8,7 @@
   flex-direction: column;
   justify-content: center;
   max-width: 1440px;
+  /* flex-wrap: wrap; */
 }
 
 .news-cards-list__title {
@@ -21,7 +22,7 @@
   padding: 62px 0;
   list-style: none;
   display: flex;
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap;
   gap: 16px;
 }
 
@@ -37,6 +38,10 @@
   margin-bottom: 80px;
   cursor: pointer;
   transition: all 0.3s linear;
+}
+
+.news-cards-list__button_hidden {
+  display: none;
 }
 
 .news-cards-list__button:hover {

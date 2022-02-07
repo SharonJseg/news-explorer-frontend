@@ -23,7 +23,7 @@
   margin-bottom: 22px;
 }
 
-.form__title_success {
+.form__title_response {
   margin-bottom: 14px;
 }
 
@@ -65,13 +65,18 @@
   visibility: visible;
 }
 
+.form__input-error_visible:last-of-type {
+  margin-bottom: 10px;
+}
+
 .form__submit-error {
-  visibility: hidden;
+  /* visibility: visible; */
   font-family: var(--ff-inter);
   font-size: 12px;
   color: var(--clr-red);
   align-self: center;
   margin-bottom: 8px;
+  margin-top: 8px;
 }
 
 .form__submit {

@@ -93,3 +93,16 @@
   border-radius: 100px;
   cursor: pointer;
 }
+
+.mobile-nav__signout {
+  background: none;
+  outline: none;
+  color: var(--clr-white);
+  border: 1px solid var(--clr-white);
+  width: 288px;
+  padding: 16px 0;
+  margin-top: 15px;
+  margin-bottom: 28px;
+  border-radius: 100px;
+  cursor: pointer;
+}
